@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "gate": 1,
+  "work_package_id": "WP-PKMS-001-001",
+  "decision": "approve",
+  "authority_mode": "bootstrap-local-unverified",
+  "approvers": [
+    {
+      "actor": "human:product-owner",
+      "role": "product-owner",
+      "source": "local-operator-entry"
+    },
+    {
+      "actor": "human:technical-owner",
+      "role": "technical-owner",
+      "source": "local-operator-entry"
+    }
+  ],
+  "rationale": "Gate 1 approves only the exact Outcome Contract and Build Contract digests shown in the gate request."
+}

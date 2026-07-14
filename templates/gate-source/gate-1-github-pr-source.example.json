@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "gate": 1,
+  "work_package_id": "WP-PKMS-001-001",
+  "decision": "approve",
+  "authority_mode": "github-pr-review",
+  "github": {
+    "repository": "OWNER/REPO",
+    "pull_request": 123,
+    "pull_request_url": "https://github.com/OWNER/REPO/pull/123",
+    "merged": true,
+    "merge_commit_sha": "0000000000000000000000000000000000000000",
+    "head_sha": "0000000000000000000000000000000000000000",
+    "base_branch": "main"
+  },
+  "approvers": [
+    {
+      "actor": "github:product-owner-handle",
+      "role": "product-owner",
+      "source": "https://github.com/OWNER/REPO/pull/123#pullrequestreview-1"
+    },
+    {
+      "actor": "github:technical-owner-handle",
+      "role": "technical-owner",
+      "source": "https://github.com/OWNER/REPO/pull/123#pullrequestreview-2"
+    }
+  ],
+  "rationale": "Gate 1 Contract PR was approved and merged in GitHub."
+}

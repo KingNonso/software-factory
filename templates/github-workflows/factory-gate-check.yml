@@ -1,0 +1,21 @@
+name: Factory Gate Check
+
+on:
+  pull_request:
+    paths:
+      - "software-factory/**"
+      - "product/**"
+      - "tasks/**"
+
+jobs:
+  validate-factory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Validate factory artifacts
+        run: python3 software-factory/cli/factoryctl.py validate
+      - name: Run factory tests
+        run: python3 -m unittest discover -s software-factory/cli/tests -v

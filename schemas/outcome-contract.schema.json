@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/software-factory/outcome-contract.schema.json",
+  "title": "Software Factory Outcome Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "work_package_id",
+    "prd",
+    "problem",
+    "desired_outcome",
+    "target_users",
+    "acceptance_criteria",
+    "invariants",
+    "non_goals",
+    "ambiguities"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "work_package_id": {
+      "type": "string"
+    },
+    "prd": {
+      "type": "object",
+      "required": [
+        "id",
+        "path"
+      ]
+    },
+    "problem": {
+      "type": "string",
+      "minLength": 1
+    },
+    "desired_outcome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_users": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "statement",
+          "oracle",
+          "evidence_required",
+          "criticality"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "oracle": {
+            "type": "string"
+          },
+          "evidence_required": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "criticality": {
+            "enum": [
+              "blocking",
+              "non-blocking"
+            ]
+          }
+        }
+      }
+    },
+    "invariants": {
+      "type": "array"
+    },
+    "non_goals": {
+      "type": "array"
+    },
+    "ambiguities": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": true
+}

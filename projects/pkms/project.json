@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "project_slug": "pkms",
+  "name": "CSEA PKMS",
+  "repository": {
+    "root": ".",
+    "default_branch": "main"
+  },
+  "paths": {
+    "main_prd": "product/01-csea-pkms-prd.md",
+    "prd_inventory": "product/PRD-inventory.md",
+    "open_questions": "product/open-questions.md",
+    "user_journeys": "product/user-journeys.md",
+    "product_root": "product",
+    "tasks_root": "tasks",
+    "architecture": [
+      "README.md",
+      "backend/ARCHITECTURE.md",
+      "agent.md",
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "work_packages": "software-factory/projects/pkms/work-packages"
+  },
+  "commands": [
+    {
+      "id": "backend-django-check",
+      "description": "Django configuration and app registry check",
+      "command": "cd backend && PYTHONPATH=. DJANGO_SETTINGS_MODULE=config.settings.test uv run python manage.py check"
+    },
+    {
+      "id": "backend-migration-drift",
+      "description": "Verify Django model changes have migrations",
+      "command": "cd backend && PYTHONPATH=. DJANGO_SETTINGS_MODULE=config.settings.test uv run python manage.py makemigrations --check --dry-run"
+    },
+    {
+      "id": "backend-pytest",
+      "description": "Run backend tests",
+      "command": "cd backend && PYTHONPATH=. DJANGO_SETTINGS_MODULE=config.settings.test uv run pytest"
+    },
+    {
+      "id": "frontend-typecheck",
+      "description": "Run frontend TypeScript typecheck",
+      "command": "cd frontend && yarn type-check"
+    },
+    {
+      "id": "frontend-tests",
+      "description": "Run frontend unit tests",
+      "command": "cd frontend && yarn test:run"
+    }
+  ],
+  "risk_rules": [
+    {
+      "path_prefix": "backend/api/apps/abac/",
+      "minimum_risk": "R2",
+      "reason": "ABAC and permission enforcement"
+    },
+    {
+      "path_prefix": "backend/api/apps/accounts/",
+      "minimum_risk": "R2",
+      "reason": "Authentication and staff identity"
+    },
+    {
+      "path_prefix": "backend/api/apps/messaging/",
+      "minimum_risk": "R2",
+      "reason": "Tenant-scoped staff messaging"
+    },
+    {
+      "path_prefix": "backend/api/apps/notifications/",
+      "minimum_risk": "R2",
+      "reason": "Tenant-scoped notifications"
+    },
+    {
+      "path_prefix": "backend/api/apps/projects/migrations/",
+      "minimum_risk": "R2",
+      "reason": "Persistent schema change"
+    },
+    {
+      "path_prefix": ".github/workflows/",
+      "minimum_risk": "R2",
+      "reason": "Delivery and deployment control"
+    }
+  ],
+  "gate_policy": {
+    "R0": {
+      "gate_1_approver_roles": [
+        "technical-owner"
+      ],
+      "gate_2_approver_roles": [
+        "technical-owner"
+      ]
+    },
+    "R1": {
+      "gate_1_approver_roles": [
+        "product-owner",
+        "technical-owner"
+      ],
+      "gate_2_approver_roles": [
+        "product-owner",
+        "technical-owner"
+      ]
+    },
+    "R2": {
+      "gate_1_approver_roles": [
+        "product-owner",
+        "technical-owner"
+      ],
+      "gate_2_approver_roles": [
+        "product-owner",
+        "technical-owner"
+      ]
+    },
+    "R3": {
+      "gate_1_approver_roles": [
+        "product-owner",
+        "technical-owner",
+        "security-owner"
+      ],
+      "gate_2_approver_roles": [
+        "product-owner",
+        "technical-owner",
+        "security-owner",
+        "operations-owner"
+      ]
+    },
+    "default": {
+      "gate_1_approver_roles": [
+        "product-owner",
+        "technical-owner"
+      ],
+      "gate_2_approver_roles": [
+        "product-owner",
+        "technical-owner"
+      ]
+    }
+  }
+}

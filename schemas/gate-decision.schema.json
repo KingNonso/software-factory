@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/software-factory/gate-decision.schema.json",
+  "title": "Software Factory Gate Decision Source",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "gate",
+    "work_package_id",
+    "decision",
+    "approvers",
+    "rationale"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "gate": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "work_package_id": {
+      "type": "string"
+    },
+    "decision": {
+      "enum": [
+        "approve",
+        "modify",
+        "reject",
+        "defer"
+      ]
+    },
+    "approvers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "actor",
+          "role",
+          "source"
+        ]
+      }
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "authority_mode": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

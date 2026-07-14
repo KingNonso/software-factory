@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "work_package_id": "WP-PKMS-001-001",
+  "prd_id": "PKMS-001",
+  "title": "Converge service-layer tenant resolution with ABAC guard",
+  "contract_revision": 1,
+  "outcome_contract": "software-factory/projects/pkms/work-packages/PKMS-001/WP-PKMS-001-001/outcome-contract.json",
+  "build_contract": "software-factory/projects/pkms/work-packages/PKMS-001/WP-PKMS-001-001/build-contract.json",
+  "risk": "R2",
+  "independence": "I2",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "AC-001",
+    "AC-002",
+    "AC-003",
+    "AC-004"
+  ],
+  "allowed_paths": [
+    "backend/api/apps/messaging/",
+    "backend/api/apps/notifications/",
+    "backend/api/apps/core/",
+    "backend/api/apps/*/tests/"
+  ],
+  "forbidden_paths": [
+    ".github/workflows/",
+    "backend/api/apps/abac/services/permission_registry.py"
+  ],
+  "max_remediation_cycles": 3
+}

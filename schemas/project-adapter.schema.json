@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/software-factory/project-adapter.schema.json",
+  "title": "Software Factory Project Adapter",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "project_slug",
+    "name",
+    "paths",
+    "commands",
+    "gate_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "project_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "object"
+    },
+    "paths": {
+      "type": "object"
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "command"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "risk_rules": {
+      "type": "array"
+    },
+    "gate_policy": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

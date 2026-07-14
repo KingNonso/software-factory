@@ -1,0 +1,33 @@
+{
+  "attempt": 0,
+  "blockers": [],
+  "claim": null,
+  "contract_digests": {
+    "build": "sha256:d964d21848f24fc67c2fe7eccbe136d1e38b696123eca074e3211dc247e0e013",
+    "outcome": "sha256:7b487bc1cee82b8dcb167baacb75c56ec48127bbcf8fb99886618a658cf89923"
+  },
+  "gate_requests": {
+    "1": {
+      "github_pr_body": "software-factory/projects/pkms/work-packages/PKMS-001/WP-PKMS-001-001/gates/gate-1-github-pr-body.md",
+      "request": "software-factory/projects/pkms/work-packages/PKMS-001/WP-PKMS-001-001/gates/gate-1-request.md",
+      "submitted_at": "2026-07-14T14:45:46Z",
+      "title": "Gate 1: Contract approval for WP-PKMS-001-001 - Converge service-layer tenant resolution with ABAC guard"
+    }
+  },
+  "git": {
+    "base_sha": "",
+    "branch": "",
+    "implementation_sha": "",
+    "merge_candidate_sha": "",
+    "merge_candidate_tree": "",
+    "pr": null,
+    "worktree": ""
+  },
+  "ledger_tail_hash": "sha256:f1e2fc29935745f899ca1db41c9a7e27236fcf3642883024201a2a82e0c05e1f",
+  "next_action": "Collect authenticated Gate 1 approval or modification.",
+  "previous_state": "shaping",
+  "schema_version": 1,
+  "state": "awaiting_gate_1",
+  "updated_at": "2026-07-14T14:45:46Z",
+  "work_package_id": "WP-PKMS-001-001"
+}

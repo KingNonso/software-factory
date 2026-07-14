@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/software-factory/state.schema.json",
+  "title": "Software Factory State",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "work_package_id",
+    "state",
+    "updated_at",
+    "contract_digests",
+    "attempt",
+    "next_action",
+    "blockers"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "work_package_id": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "previous_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "contract_digests": {
+      "type": "object",
+      "required": [
+        "outcome",
+        "build"
+      ]
+    },
+    "git": {
+      "type": "object"
+    },
+    "claim": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "attempt": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "next_action": {
+      "type": "string"
+    },
+    "blockers": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": true
+}

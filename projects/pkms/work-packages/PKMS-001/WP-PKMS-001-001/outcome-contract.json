@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "work_package_id": "WP-PKMS-001-001",
+  "prd": {
+    "id": "PKMS-001",
+    "path": "product/01-csea-pkms-prd.md",
+    "revision_sha": "repo-working-tree"
+  },
+  "problem": "The ABAC guard may authorize a request using the shared request organization resolver while messaging and notification services resolve the current organization through a narrower fallback chain. That can make authorization and data access disagree when the tenant is derivable from headers but not attached to the request object.",
+  "desired_outcome": "Every service-layer path that needs the current organization uses the same resolver as the ABAC guard, so an admitted request and the data path agree on tenant context or fail closed.",
+  "target_users": [
+    "staff user",
+    "organization administrator",
+    "technical operator"
+  ],
+  "journey_refs": [
+    "tasks/backlog.md#T-011"
+  ],
+  "requirement_refs": [
+    "PKMS access control and staff-scoped data isolation"
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "statement": "Messaging service organization resolution uses the shared request organization resolver instead of a custom tenant/org/user fallback chain.",
+      "oracle": "code-review-plus-test",
+      "evidence_required": [
+        "targeted pytest",
+        "verifier source inspection"
+      ],
+      "criticality": "blocking"
+    },
+    {
+      "id": "AC-002",
+      "statement": "Notification service organization resolution uses the shared request organization resolver instead of a custom tenant/org/user fallback chain.",
+      "oracle": "code-review-plus-test",
+      "evidence_required": [
+        "targeted pytest",
+        "verifier source inspection"
+      ],
+      "criticality": "blocking"
+    },
+    {
+      "id": "AC-003",
+      "statement": "A regression test covers a header-derived tenant path where the ABAC guard and the service layer must resolve the same organization.",
+      "oracle": "automated-test",
+      "evidence_required": [
+        "pytest result"
+      ],
+      "criticality": "blocking"
+    },
+    {
+      "id": "AC-004",
+      "statement": "The stale user-facing copy 'Organization context is required.' in messaging service error handling is removed or replaced with copy that matches the tenant terminology used by the current codebase.",
+      "oracle": "source-inspection",
+      "evidence_required": [
+        "verifier source inspection"
+      ],
+      "criticality": "non-blocking"
+    }
+  ],
+  "invariants": [
+    "PermissionRequired remains the gate for protected GraphQL/admin access.",
+    "Services fail closed when no current organization can be resolved.",
+    "No cross-tenant fallback to a user's default tenant may override an organization admitted by the request context.",
+    "No production secrets, private staff content, or customer data may be logged while diagnosing this path."
+  ],
+  "non_goals": [
+    "Do not redesign ABAC permissions.",
+    "Do not change the tenant middleware contract unless a blocking defect proves it is necessary.",
+    "Do not add new organization or tenant models.",
+    "Do not change deployment workflows."
+  ],
+  "success_metrics": [
+    {
+      "metric": "tenant_resolution_mismatch_regression_count",
+      "target": 0,
+      "window": "ongoing"
+    }
+  ],
+  "ambiguities": [],
+  "failure_and_rollback_outcome": "If remediation fails, leave the existing behavior unchanged and keep the backlog item open. If a merged change causes tenant-resolution regressions, revert the implementation commit and rerun backend tenant and ABAC tests."
+}

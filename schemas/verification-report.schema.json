@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/software-factory/verification-report.schema.json",
+  "title": "Software Factory Verification Report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "work_package_id",
+    "verifier",
+    "implementation_sha",
+    "contract_digests",
+    "acceptance_results",
+    "findings",
+    "untested",
+    "architectural_status",
+    "recommendation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "work_package_id": {
+      "type": "string"
+    },
+    "verifier": {
+      "type": "object",
+      "required": [
+        "id",
+        "provider",
+        "run_id",
+        "independence_level"
+      ]
+    },
+    "implementation_sha": {
+      "type": "string"
+    },
+    "contract_digests": {
+      "type": "object"
+    },
+    "acceptance_results": {
+      "type": "array"
+    },
+    "findings": {
+      "type": "array"
+    },
+    "untested": {
+      "type": "array"
+    },
+    "architectural_status": {
+      "enum": [
+        "CLEAR",
+        "WATCH",
+        "BLOCK"
+      ]
+    },
+    "recommendation": {
+      "enum": [
+        "APPROVE",
+        "COMMENT",
+        "REQUEST_CHANGES"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

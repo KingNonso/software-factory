@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/software-factory/build-contract.schema.json",
+  "title": "Software Factory Build Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "work_package_id",
+    "architecture_refs",
+    "allowed_paths",
+    "forbidden_paths",
+    "security_privacy_constraints",
+    "migration",
+    "required_checks",
+    "adversarial_scenarios",
+    "rollout",
+    "rollback",
+    "risk",
+    "budgets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "work_package_id": {
+      "type": "string"
+    },
+    "architecture_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "allowed_paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "security_privacy_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "migration": {
+      "type": "object"
+    },
+    "required_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "adversarial_scenarios": {
+      "type": "array"
+    },
+    "risk": {
+      "type": "object",
+      "required": [
+        "level",
+        "required_independence"
+      ]
+    },
+    "budgets": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

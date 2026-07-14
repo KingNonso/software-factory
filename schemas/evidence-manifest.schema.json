@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/software-factory/evidence-manifest.schema.json",
+  "title": "Software Factory Evidence Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "work_package_id",
+    "generated_at",
+    "claims",
+    "known_gaps"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "work_package_id": {
+      "type": "string"
+    },
+    "implementation_sha": {
+      "type": "string"
+    },
+    "pr_head_sha": {
+      "type": "string"
+    },
+    "merge_candidate_sha": {
+      "type": "string"
+    },
+    "merge_candidate_tree": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "acceptance_id",
+          "oracle",
+          "artifact",
+          "producer"
+        ]
+      }
+    },
+    "known_gaps": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "factory_version": "0.1.0",
+  "state_machine": {
+    "initial_state": "candidate",
+    "manual_gate_states": [
+      "awaiting_gate_1",
+      "awaiting_gate_2"
+    ],
+    "terminal_states": [
+      "closed",
+      "rejected",
+      "cancelled",
+      "superseded",
+      "closed_non_runtime",
+      "incident_closed"
+    ]
+  },
+  "risk_levels": {
+    "R0": {
+      "description": "Documentation, comments, test-only changes",
+      "minimum_independence": "I0"
+    },
+    "R1": {
+      "description": "Reversible application behavior without auth, tenancy, persistence, or deployment changes",
+      "minimum_independence": "I1"
+    },
+    "R2": {
+      "description": "Migrations, GraphQL contracts, ABAC, tenant scoping, sensitive data, audit, external integrations",
+      "minimum_independence": "I2"
+    },
+    "R3": {
+      "description": "Destructive migrations, production data access, retention or legal policy, infrastructure deletion",
+      "minimum_independence": "I3"
+    }
+  },
+  "independence_levels": {
+    "I0": "Deterministic CI only",
+    "I1": "Fresh verifier session, separate worktree, immutable SHA, report-only review",
+    "I2": "I1 plus different provider or specialist review where practical",
+    "I3": "I2 plus staging, operations or security review, canary, and rollback evidence"
+  },
+  "control_channel": {
+    "mvp_storage": "repo-local files under software-factory/projects/<project>/work-packages",
+    "target_storage": "protected factory-control/<work-package> ref or external attestation store",
+    "rule": "Do not commit attestation updates onto the implementation PR after the subject SHA is frozen."
+  }
+}

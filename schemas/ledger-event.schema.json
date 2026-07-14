@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/software-factory/ledger-event.schema.json",
+  "title": "Software Factory Ledger Event",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "event_id",
+    "timestamp",
+    "work_package_id",
+    "actor",
+    "event_type",
+    "previous_state",
+    "next_state",
+    "reason",
+    "input_hash",
+    "previous_event_hash",
+    "event_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "event_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "work_package_id": {
+      "type": "string"
+    },
+    "actor": {
+      "type": "object"
+    },
+    "event_type": {
+      "type": "string"
+    },
+    "previous_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "next_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "input_hash": {
+      "type": "string"
+    },
+    "previous_event_hash": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "event_hash": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

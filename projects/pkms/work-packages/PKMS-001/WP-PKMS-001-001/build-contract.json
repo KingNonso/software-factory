@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "work_package_id": "WP-PKMS-001-001",
+  "architecture_refs": [
+    "README.md",
+    "backend/ARCHITECTURE.md",
+    "AGENTS.md",
+    "backend/CLAUDE.md"
+  ],
+  "allowed_paths": [
+    "backend/api/apps/messaging/",
+    "backend/api/apps/notifications/",
+    "backend/api/apps/core/",
+    "backend/api/apps/*/tests/"
+  ],
+  "forbidden_paths": [
+    ".github/workflows/",
+    "backend/api/apps/abac/services/permission_registry.py"
+  ],
+  "interfaces_changed": [],
+  "security_privacy_constraints": [
+    "Fail closed when tenant context is absent.",
+    "Do not weaken PermissionRequired or registered ABAC codenames.",
+    "Do not log secrets, request tokens, personal data, or private staff content.",
+    "Keep UUID inputs at request boundaries and internal integer IDs inside service code where applicable."
+  ],
+  "migration": {
+    "required": false,
+    "strategy": "none",
+    "rollback": "revert the implementation commit and rerun backend tenant and ABAC tests"
+  },
+  "observability": [
+    "backend test failure on tenant resolver mismatch"
+  ],
+  "required_checks": [
+    "backend-django-check",
+    "backend-pytest"
+  ],
+  "adversarial_scenarios": [
+    "middleware has not attached request.tenant but X-Tenant-Uuid can resolve the current organization",
+    "request tenant differs from the user's default tenant",
+    "no tenant can be resolved and the service must fail closed"
+  ],
+  "rollout": "normal protected merge after Gate 2; no separate data migration or deployment workflow change",
+  "rollback": "revert the implementation commit and redeploy the prior backend artifact",
+  "risk": {
+    "level": "R2",
+    "reasons": [
+      "tenant isolation",
+      "ABAC and service-layer authorization/data-path consistency"
+    ],
+    "required_independence": "I2",
+    "required_approver_roles": [
+      "product-owner",
+      "technical-owner"
+    ]
+  },
+  "budgets": {
+    "max_remediation_cycles": 3,
+    "max_scope_expansion": "none"
+  }
+}
